@@ -1,5 +1,5 @@
-# twitter-qa
-Template for the Camunda Training for Java Developers
+# payment-process
+Template for the Camunda Training for Java Developers using embedded engine.
 
 ## Maven Setup for Enterprise Version
 
