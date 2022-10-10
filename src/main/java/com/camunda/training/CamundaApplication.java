@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@EnableProcessApplication("twitter-qa")
+@EnableProcessApplication("webshop")
 public class CamundaApplication {
   public static void main(String... args) {
     SpringApplication.run(CamundaApplication.class, args);
