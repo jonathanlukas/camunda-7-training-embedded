@@ -55,7 +55,7 @@ The goal of this lab is to build your first JUnit test case for a BPMN 2.0 proce
    annotation. The annotation has to be added to the testHappyPath method. Fill your file name into the resources.
 6. Add the ProcessEngineExtension as a JUnit 5 extension to the test class.
    ```java
-   @ExtendWith(ProcessEngineExtension.class)
+   @ExtendWith(ProcessEngineCoverageExtension.class)
    ```
 7. At the start of the test code, we create a Map of type String, Object to use to put in our variables. Then we use the runtimeService() API to start a Twitter QA process instance using the ID (aka ‘key’ as you’ll see in the API call below) of the process template (TwitterQAProcess). We also provide the variables HashMap as an argument to the method. Finally, we utilize our assertion library to make sure that our process has indeed completed.
    ```java
