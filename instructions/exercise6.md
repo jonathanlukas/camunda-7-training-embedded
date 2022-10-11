@@ -18,7 +18,7 @@ You create a new process model to handle orders. The payment gets started by rec
     3. History Cleanup: Time to live 30
     4. Send Task implementation: Type **Delegate Expression**, Delegate expression **${paymentRequest}**
     5. Message Intermediate Catch Event: Open the Message section in the property panel and add a new Global message reference. Enter **paymentCompletedMessage** as Name.
-3. Save the process model in the src/main/resources folder of your project. Name it **order-process.bpmn**.
+3. Save the process model in the src/main/resources folder of your project. Name it **order_process.bpmn**.
 
 ### Message sending
 4. Create a new class `SendPaymentRequestDelegate`. It should implement the `JavaDelegate` interface.
