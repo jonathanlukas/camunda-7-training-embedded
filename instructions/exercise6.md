@@ -16,7 +16,7 @@ You create a new process model to handle orders. The payment gets started by rec
     1. Process Id: **OrderProcess**
     2. Process name: **Order process**
     3. History Cleanup: Time to live 30
-    4. Send Task implementation: Type **Delegate Expression**, Delegate expression **paymentRequest**
+    4. Send Task implementation: Type **Delegate Expression**, Delegate expression **${paymentRequest}**
     5. Message Intermediate Catch Event: Open the Message section in the property panel and add a new Global message reference. Enter **paymentCompletedMessage** as Name.
 3. Save the process model in the src/main/resources folder of your project. Name it **order-process.bpmn**.
 
@@ -52,14 +52,14 @@ You create a new process model to handle orders. The payment gets started by rec
 ### Message receiving
 6. Enter the Modeler and open the payment process. Change the start event to a Message Start Event. Open the Message section in the property panel and add a new Global message reference. Enter **paymentRequestMessage** as Name.
 7. Change the end event to a Message End Event. Fill the Implementation with type `DelegateExpression` and Delegate expression `paymentCompletion`.
-8. Create another delegate that sends a message back to the origin process:
+8. Create another delegate that sends a message back to the origin process. The correlation happens via businessKey in this implementation.
     ```java
     import org.camunda.bpm.engine.delegate.JavaDelegate;
     
     @Component("paymentCompletion")
     public class SendPaymentCompletionDelegate implements JavaDelegate {
 
-      private static final Logger LOG = LoggerFactory.getLogger(SendPaymentRequestDelegate.class);
+      private static final Logger LOG = LoggerFactory.getLogger(SendPaymentCompletionDelegate.class);
 
       @Override
       public void execute(DelegateExecution execution) throws Exception {
@@ -75,8 +75,53 @@ You create a new process model to handle orders. The payment gets started by rec
 
 ### JUnit testing
 9. Create a new test method `testOrderProcess`. Don't forget the annotations `@Test` and `@Deployment`:
-    
+   ```java
+   @Test
+   @Deployment(resources = "order_process.bpmn")
+   public void testOrderProcess() {
+     // I will not start the other process now
+     Mocks.register("paymentRequest", (JavaDelegate) execution -> {});
+     ProcessInstance processInstance = runtimeService().startProcessInstanceByKey("OrderProcess", "Test 1", withVariables(
+     "orderTotal",        30.00,
+     "customerId",        "cust30",
+     "cardNumber",        "1234 5678",
+     "CVC",        "123",
+     "expiryDate",        "09/24"
+     ));
+     runtimeService().correlateMessage("paymentCompletedMessage");
+     assertThat(processInstance).isEnded();
+   }
+   ```
 
+### Acceptance testing
+
+10. Start a process instance from the modeler using this payload:
+    ```json
+    {
+      "variables": {
+        "orderTotal": {
+          "value": 49.99,
+          "type": "Double"
+        },
+        "customerId": {
+          "value": "cust25",
+          "type": "String"
+        },
+        "cardNumber": {
+          "value": "1234 5678"
+        },
+        "CVC": {
+          "value": "123"
+        }, 
+        "expiryDate": {
+          "value": "09/24"
+        }
+      },
+      "businessKey": "Order test 1"
+    }    
+    ```
+    What happens?
+11. We will deal with the problem in the next exercise.
 
 ### Summary
 This exercise you have added a process model to handle orders. It starts the payment process by using message correlation and waits until the payment process is finished. The payment process sends a message back to the order process.
