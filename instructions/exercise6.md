@@ -63,7 +63,7 @@ You create a new process model to handle orders. The payment gets started by rec
 
       @Override
       public void execute(DelegateExecution execution) throws Exception {
-        ProcessInstance processInstance = execution
+        execution
         .getProcessEngineServices()
         .getRuntimeService()
         .createMessageCorrelation("paymentCompletedMessage")
