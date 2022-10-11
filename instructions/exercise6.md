@@ -51,7 +51,7 @@ You create a new process model to handle orders. The payment gets started by rec
 
 ### Message receiving
 6. Enter the Modeler and open the payment process. Change the start event to a Message Start Event. Open the Message section in the property panel and add a new Global message reference. Enter **paymentRequestMessage** as Name.
-7. Change the end event to a Message End Event. Fill the Implementation with type `DelegateExpression` and Delegate expression `paymentCompletion`.
+7. Change the end event to a Message End Event. Fill the Implementation with type `DelegateExpression` and Delegate expression `${paymentCompletion}`.
 8. Create another delegate that sends a message back to the origin process. The correlation happens via businessKey in this implementation.
     ```java
     import org.camunda.bpm.engine.delegate.JavaDelegate;
