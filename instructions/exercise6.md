@@ -1,11 +1,13 @@
 # Message Events
 
 ## Goal
+
 You create a new process model to handle orders. The payment gets started by receiving a message from the order process. The order process continues once the payment is completed.
 
 ## Detailed steps
 
 ### Process modeling
+
 1. Enter the Modeler and create a new BPMN diagram. Model an order process with the following elements:
     * Start event **Order received**
     * Send task **Invoke payment**
@@ -21,6 +23,7 @@ You create a new process model to handle orders. The payment gets started by rec
 3. Save the process model in the src/main/resources folder of your project. Name it **order_process.bpmn**.
 
 ### Message sending
+
 4. Create a new class `SendPaymentRequestDelegate`. It should implement the `JavaDelegate` interface.
     ```java
     import org.camunda.bpm.engine.delegate.JavaDelegate;
@@ -50,30 +53,34 @@ You create a new process model to handle orders. The payment gets started by rec
     ```
 
 ### Message receiving
+
 6. Enter the Modeler and open the payment process. Change the start event to a Message Start Event. Open the Message section in the property panel and add a new Global message reference. Enter **paymentRequestMessage** as Name.
 7. Change the end event to a Message End Event. Fill the Implementation with type `DelegateExpression` and Delegate expression `${paymentCompletion}`.
 8. Create another delegate that sends a message back to the origin process. The correlation happens via businessKey in this implementation.
     ```java
-    import org.camunda.bpm.engine.delegate.JavaDelegate;
-    
-    @Component("paymentCompletion")
-    public class SendPaymentCompletionDelegate implements JavaDelegate {
+    package com.camunda.training;
 
-      private static final Logger LOG = LoggerFactory.getLogger(SendPaymentCompletionDelegate.class);
-
-      @Override
-      public void execute(DelegateExecution execution) throws Exception {
-        execution
-        .getProcessEngineServices()
-        .getRuntimeService()
-        .createMessageCorrelation("paymentCompletedMessage")
-        .processInstanceBusinessKey(execution.getProcessBusinessKey())
-        .correlate();
-      }
-    }
+   import org.camunda.bpm.engine.delegate.DelegateExecution;
+   import org.camunda.bpm.engine.delegate.JavaDelegate;
+   import org.springframework.stereotype.Component;
+   
+   @Component("paymentCompletion")
+   public class SendPaymentCompletionDelegate implements JavaDelegate {
+   
+   @Override
+   public void execute(DelegateExecution execution) throws Exception {
+   execution
+   .getProcessEngineServices()
+   .getRuntimeService()
+   .createMessageCorrelation("paymentCompletedMessage")
+   .processInstanceBusinessKey(execution.getProcessBusinessKey())
+   .correlate();
+   }
+   }
     ```
 
 ### JUnit testing
+
 9. Create a new test method `testOrderProcess`. Don't forget the annotations `@Test` and `@Deployment`:
    ```java
    @Test
@@ -124,4 +131,5 @@ You create a new process model to handle orders. The payment gets started by rec
 11. We will deal with the problem in the next exercise.
 
 ### Summary
+
 This exercise you have added a process model to handle orders. It starts the payment process by using message correlation and waits until the payment process is finished. The payment process sends a message back to the order process.
