@@ -43,21 +43,22 @@ The goal of this lab is to build your first JUnit test case for a BPMN 2.0 proce
    </dependency>
    ```
 3. Open the JUnit test class from the folder `src/test/java` and inspect the content.
-4. Add the static imports for the Assertions and camunda-bpm-assert support into the import section of the class:
+4. Prepare your IDE to handle the static imports of camunda-bpm-assert and assertJ. In Eclipse go to **Window > Preferences > Java > Editor > Content Assist > Favorites > New Type...** and add the following types: `org.camunda.bpm.engine.test.assertions.ProcessEngineTests` and `org.assertj.core.api.Assertions`. Also, go to **Window > Preferences > Java > Code Style > Organize Imports** and set "Number of static imports needed for .\*" to "0". IntelliJ should pick up the **pom.xml** updates and prompt you to import the changes.
+5. Add the static imports for the Assertions and camunda-bpm-assert support into the import section of the class:
    ```java
    import static org.camunda.bpm.engine.test.assertions.ProcessEngineTests.*;
    import static org.assertj.core.api.Assertions.*;
    ```
-5. Add the process to test with the
+6. Add the process to test with the
    ```java
    @Deployment(resources = "your bpmn file.bpmn")
    ```
    annotation. The annotation has to be added to the testHappyPath method. Fill your file name into the resources.
-6. Add the ProcessEngineExtension as a JUnit 5 extension to the test class.
+7. Add the ProcessEngineExtension as a JUnit 5 extension to the test class.
    ```java
    @ExtendWith(ProcessEngineCoverageExtension.class)
    ```
-7. At the start of the test code, we create a Map of type String, Object to use to put in our variables. Then we use the runtimeService() API to start a process instance using the ID (aka ‘key’ as you’ll see in the API call below) of the process template. We also provide the variables HashMap as an argument to the method. Finally, we utilize our assertion library to make sure that our process has indeed completed.
+8. At the start of the test code, we create a Map of type String, Object to use to put in our variables. Then we use the runtimeService() API to start a process instance using the ID (aka ‘key’ as you’ll see in the API call below) of the process template. We also provide the variables HashMap as an argument to the method. Finally, we utilize our assertion library to make sure that our process has indeed completed.
    ```java
    // Create a HashMap to put in variables for the process instance
    Map<String, Object> variables = new HashMap<String, Object>();
@@ -68,7 +69,7 @@ The goal of this lab is to build your first JUnit test case for a BPMN 2.0 proce
    // Make assertions on the process instance
    assertThat(processInstance).isEnded().hasPassed("Activity_Charge_Credit_Card");
    ```
-8. The process engine used in the rule in the JUnit test above needs to be configured. To do this, open the file named camunda.cfg.xml under `src/test/resources` and fill it with the content below. This configuration uses an in memory database, emits a full audit (history) trail, uses a configurable expression manager (mocks), and has a placeholder for further extensions (plugins).
+9. The process engine used in the rule in the JUnit test above needs to be configured. To do this, open the file named camunda.cfg.xml under `src/test/resources` and fill it with the content below. This configuration uses an in memory database, emits a full audit (history) trail, uses a configurable expression manager (mocks), and has a placeholder for further extensions (plugins).
    ```xml
    <?xml version="1.0" encoding="UTF-8"?>
    <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
@@ -83,7 +84,7 @@ The goal of this lab is to build your first JUnit test case for a BPMN 2.0 proce
      </bean>
    </beans>
    ```
-9. As spring boot defaults the logging level in tests to DEBUG (which is verbose), you can create a logging configuration at `src/test/resources` with the name `logback-test.xml`. In this example we configure some levels to be more silent and concentrate on the output of the camunda engine:
+10. As spring boot defaults the logging level in tests to DEBUG (which is verbose), you can create a logging configuration at `src/test/resources` with the name `logback-test.xml`. In this example we configure some levels to be more silent and concentrate on the output of the camunda engine:
    ```xml
    <configuration>
      <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -105,4 +106,4 @@ The goal of this lab is to build your first JUnit test case for a BPMN 2.0 proce
      <logger name="org.camunda.bpm.engine.test" level="debug" />
    </configuration>
    ```
-10. Run the Junit test. Everything should work.
+11. Run the Junit test. Everything should work.
