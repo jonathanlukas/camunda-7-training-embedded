@@ -99,10 +99,15 @@ You create a new process model to handle orders. The payment gets started by rec
      assertThat(processInstance).isEnded();
    }
    ```
+10. Extend the `setup`-method in your Junit test class to register all mocks:
+   ```java
+    Mocks.register("paymentRequest", new SendPaymentRequestDelegate());
+    Mocks.register("paymentCompletion", new SendPaymentCompletionDelegate());
+   ```
 
 ### Acceptance testing
 
-10. Start a process instance from the modeler using this payload:
+11. Start a process instance from the modeler using this payload:
     ```json
     {
       "variables": {
@@ -128,7 +133,7 @@ You create a new process model to handle orders. The payment gets started by rec
     }    
     ```
     What happens?
-11. We will deal with the problem in the next exercise.
+12. We will deal with the problem in the next exercise.
 
 ### Summary
 
