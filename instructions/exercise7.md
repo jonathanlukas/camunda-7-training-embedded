@@ -43,3 +43,10 @@ In this lab, you will throw an exception and then refactor the process to handle
     ```
 4. Run only this test. This should work.
 5. Run all tests. Some of them fail. Why?
+6. Correct the not-running tests by adding a manual job execution to pass the **Charge credit card** activity.
+   ```java
+   // assert that the process is waiting at charge credit card
+   assertThat(processInstance).isWaitingAt("Activity_Charge_Credit_Card");
+   execute(job());
+   ```
+7. Now, all tests are ok again.
