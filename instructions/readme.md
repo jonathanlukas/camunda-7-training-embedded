@@ -8,3 +8,6 @@
 6. [Exercise 8](./exercise8.md)
 7. [Exercise 9](./exercise9.md)
 8. [Exercise 10](./exercise10.md)
+9. [Exercise 11](./exercise11.md)
+8. [Exercise 12](./exercise12.md)
+9. [Exercise 13](./exercise13.md)
