@@ -1,28 +1,56 @@
-# Introduce compensation
+# Handling Errors
 
 ## Goal
 
-In this lab, we will include compensation to show that a task is compensated after a business error happened
+In this exercise you will handle an error that happend in the credit card service. You will use an attached error boundary event to follow another path in the payment process. You will improve the test of exercise 4.
 
-## Short description
+## Detailed Steps
 
-* After the error boundary event, remove the task and morph the end event to a **Compensate End Event**
-* Attach a boundary event to the **deduct amount from credit** service task and morph it to a **Compensate Boundary Event**
-* Add a compensation task by clicking the task icon in the context of the **Compensate Boundary Event** and name it **Refund credit**
-* Adjust the `testChargingError` test to assert that the completed process instance has passed the **Refund credit** task
+### Process Modeling
+1. Open your payment process in the modeler. Attach a boundary event to the Charge credit card task. Change the event to an Error Boundary Event. Add a label to the error event like **Charging failed**.
+2. Open the property panel for the error boundary event and the open the Error section. Create a Global error reference and fill a name like Charging failed, as code the value **chargingError**, as Code variable **errorCode** and as Message variable **errorMessage**.
+3. For simplicity, add a Message End Event to the error event. Name the message end event Payment failed. For the implementation, select delegate expression and use the same delegate as in the other message end event: **paymentCompletion**.
 
-## Detailed steps
+### Updating the Charge Credit Card Delegate
+1. Open the **ChargeCreditCardDelegate**.
+2. Within the execute function, wrap the call to the credit card service in a try-catch-block. When you catch an exception, throw the BPMN Error:
+```java
+try {
+  creditCardService.chargeAmount(cardNumber, cvc, expiryData, amount);
+} catch (Exception exc) {
+  throw new BpmnError("chargingError", "We failed to charge credit card with card number " + cardNumber, exc);
+}
+```
 
-1. Currently, you should have an **Error Boundary Event** on your **charge credit card** task. After this charging error, let a sequence flow point to an **End Event**.
-2. Morph this **End Event** to be a **Compensate End Event**.
-3. Now, add a **Boundary Event** to the **deduct amount from credit** task.
-4. Morph the **Boundary Event** to a **Compensate Boundary Event**.
-5. In the context of this **Compensate Boundary Event**, create a Task. This task will not be connected with a sequence flow, but with a **Association** (which is correct and wanted).
-6. Now go to your tests. Add another statement to the last assert statement so that the whole statement will look like this:
-    ```java
-   assertThat(processInstance)
-        .isEnded()
-        .hasPassed(<Id of the compensate end event>)
-        .hasPassed(<Id of the compensation task>);
-    ```
-7. Run your tests.
+### JUnit Testing
+
+1. Add a new test method with the name testInvalidExpiryDate(). Add the @Test annotation.
+```java
+@Test
+public void testInvalidExpiryDate() {
+}
+```
+2. Mock the **paymentCompletion** delegate, so that no message is sent:
+```java
+Mocks.register("paymentCompletion", (JavaDelegate)execution -> {});
+```
+3. Start the payment process. Make sure to use an invalid expiry date:
+```java
+Map<String, Object> variables = new HashMap<String, Object>();
+variables.put("orderTotal", 30.00);
+variables.put("customerId", "cust20");
+variables.put("cardNumber", "1234 5678");
+variables.put("CVC","123");
+variables.put("expiryDate","09/241");
+// Start process with Java API and variables
+ProcessInstance processInstance = runtimeService().startProcessInstanceByKey("PaymentProcess", variables);
+```
+4. In your test, start the job of the process and add assertions to verify that the error got caught:
+```java
+assertThat(processInstance).isWaitingAt("StartEvent_Payment_Required");
+execute(job());
+// Make assertions on the process instance
+assertThat(processInstance).isEnded().hasPassed("Activity_Charge_Credit_Card")
+    .hasNotPassed("Event_Payment_Complete")
+    .hasPassed("Event_0b0thna");
+```
