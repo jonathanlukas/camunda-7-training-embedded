@@ -11,8 +11,9 @@ Add a Business Rule Task to the order process and calculate a discount to the or
 3. Enter the decision table and name the input column to **Order amount**. Set the input expression to **orderTotal**. Select **double** as type to match your amount variable type.
 4. Label the output column to Discount percentage and name the output as discount. Set the type to integer.
 5. Add some rules to discount some orders. An example which include less than, greater or equal to, along with ranges is shown below. Use Unique for the Hit Policy. Unique Hit Policy should only satisfy one row.
-6. Save the decision table to your src/main/resources folder.
-7. Simulate your decision rule with the [DMN simulator](https://consulting.camunda.com/dmn-simulator/). Drag the dmn file on the canvas of the simulator. Enter different values. You can edit the decision table in the siumlator as well and download the changed file to your computer.
+![image](https://user-images.githubusercontent.com/5269168/195629261-549a3e16-dc5e-4555-b444-5177ad432a30.png)
+7. Save the decision table to your src/main/resources folder.
+8. Simulate your decision rule with the [DMN simulator](https://consulting.camunda.com/dmn-simulator/). Drag the dmn file on the canvas of the simulator. Enter different values. You can edit the decision table in the siumlator as well and download the changed file to your computer.
 
 ### Process Modeling
 1. Open the order process in the Modeler.
