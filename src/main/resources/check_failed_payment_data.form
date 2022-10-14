@@ -4,6 +4,30 @@
       "text": "### Check the failed payment",
       "type": "text",
       "id": "Field_0hfa6ss"
+    },
+    {
+      "label": "Customer Id",
+      "type": "textfield",
+      "id": "Field_0xygz78",
+      "key": "customerId"
+    },
+    {
+      "label": "Card Number",
+      "type": "textfield",
+      "id": "Field_12u1qxn",
+      "key": "cardNumber"
+    },
+    {
+      "label": "CVC",
+      "type": "textfield",
+      "id": "Field_0mq1k1c",
+      "key": "CVC"
+    },
+    {
+      "label": "Expiry Date",
+      "type": "textfield",
+      "id": "Field_1myumvk",
+      "key": "expiryDate"
     }
   ],
   "type": "default",
