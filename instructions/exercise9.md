@@ -2,7 +2,7 @@
 
 ## Goal
 
-In this exercise you will handle an error that happend in the credit card service. You will use an attached error boundary event to follow another path in the payment process. You will improve the test of exercise 4.
+In this exercise you will handle an error that happened in the credit card service. You will use an attached error boundary event to follow another path in the payment process. You will improve the test of exercise 4.
 
 ## Detailed Steps
 
