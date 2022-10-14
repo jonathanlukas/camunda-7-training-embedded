@@ -16,6 +16,11 @@
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_0rq6vhf" sourceRef="PaymentCompletedEvent" targetRef="OrderCompletedEndEvent" />
     <bpmn:sendTask id="InvokePaymentTask" name="Invoke payment" camunda:delegateExpression="${paymentRequest}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="orderTotal">${discountedAmount}</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_09ljoto</bpmn:incoming>
       <bpmn:outgoing>Flow_05ylx1l</bpmn:outgoing>
     </bpmn:sendTask>
