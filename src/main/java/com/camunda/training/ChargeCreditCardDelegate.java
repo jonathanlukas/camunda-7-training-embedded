@@ -23,6 +23,9 @@ public class ChargeCreditCardDelegate implements JavaDelegate {
     String expiryData = (String) execution.getVariable("expiryDate");
     Double amount = (Double) execution.getVariable("openAmount");
     // execute business logic using the variables
+    if (cvc.equals("789")) {
+      throw new RuntimeException("CVC invalid!");
+    }
     creditCardService.chargeAmount(cardNumber, cvc, expiryData, amount);
   }
 }
