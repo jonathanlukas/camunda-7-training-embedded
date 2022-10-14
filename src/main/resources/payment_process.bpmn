@@ -17,11 +17,11 @@
       <bpmn:outgoing>Flow_0dht3xx</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_03f9xw3" name="no" sourceRef="Gateway_Amount_Fully_Paid" targetRef="Activity_Charge_Credit_Card">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${orderTotal &gt; customerCredit}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${openAmount &gt; 0}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1laatrd" sourceRef="Activity_Charge_Credit_Card" targetRef="Gateway_03qjfwl" />
     <bpmn:sequenceFlow id="Flow_1i5cxpc" name="yes" sourceRef="Gateway_Amount_Fully_Paid" targetRef="Gateway_03qjfwl">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${orderTotal &lt;= customerCredit}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${openAmount == 0}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:endEvent id="Event_Payment_Complete" name="payment complete">
       <bpmn:incoming>Flow_0dht3xx</bpmn:incoming>
