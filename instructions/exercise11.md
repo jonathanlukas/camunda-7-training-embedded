@@ -19,7 +19,7 @@ You have to define what dat should be displayed on that forms.
 ### Form modeling
 9. In the Modeler, create a new Form for the Camunda Platform.
 10. In the property panel of the form, change the Id from the generated value to the value you have set in the user task: **checkPaymentDataForm**.
-11. Enter Cockpit and select the last completed process instance of the payment process from the history. Open the Variable tab. All (important) variables should be shown on the form. Additionally a form field for the decision is required.
+11. Enter Cockpit and select the last completed process instance of the payment process from the history. Open the Variable tab. All (important) variables should be shown on the form. Additionally, a form field for the decision is required.
 12. Drag a Text from the palette onto the canvas to provide a headline. The Text could be like
 ```
 ### Check the failed payment
