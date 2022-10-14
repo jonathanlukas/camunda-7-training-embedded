@@ -28,6 +28,20 @@
       "type": "textfield",
       "id": "Field_1myumvk",
       "key": "expiryDate"
+    },
+    {
+      "label": "Order Total",
+      "type": "number",
+      "id": "Field_0f0yw0k",
+      "key": "orderTotal",
+      "disabled": true
+    },
+    {
+      "label": "Open Amount",
+      "type": "number",
+      "id": "Field_0lzt4iy",
+      "key": "openAmount",
+      "disabled": true
     }
   ],
   "type": "default",
