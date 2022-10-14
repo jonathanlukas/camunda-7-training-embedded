@@ -29,7 +29,7 @@
       <bpmn:incoming>Flow_03f9xw3</bpmn:incoming>
       <bpmn:outgoing>Flow_1laatrd</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:startEvent id="StartEvent_Payment_Required" name="payment required">
+    <bpmn:startEvent id="StartEvent_Payment_Required" name="payment required" camunda:asyncBefore="true">
       <bpmn:outgoing>Flow_16d4uce</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0080t7c" messageRef="Message_26qs73r" />
     </bpmn:startEvent>
