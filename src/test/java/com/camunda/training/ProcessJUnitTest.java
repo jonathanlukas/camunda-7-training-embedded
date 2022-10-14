@@ -132,7 +132,7 @@ public class ProcessJUnitTest {
   @Test
   @Deployment(resources = "payment_process.bpmn")
   public void testInvalidExpiryDate() {
-
+    Mocks.register("paymentCompletion", (JavaDelegate)execution -> {});
   }
 
 }
