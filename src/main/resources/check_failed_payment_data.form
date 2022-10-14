@@ -1,5 +1,11 @@
 {
-  "components": [],
+  "components": [
+    {
+      "text": "### Check the failed payment",
+      "type": "text",
+      "id": "Field_0hfa6ss"
+    }
+  ],
   "type": "default",
   "id": "checkPaymentDataForm",
   "exporter": {
