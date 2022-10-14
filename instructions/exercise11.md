@@ -29,14 +29,14 @@ You have to define what dat should be displayed on that forms.
 15. Add a Checkbox field for the decision of the user. It should get a Key of **errorResolved** to match the condition of the XOR gateway.
 
 ### Run with Tasklist
-16. Open Tasklist at http://localhost:8080/camunda/app/tasklist.
+16. Deploy the form from the modeler and open Tasklist at http://localhost:8080/camunda/app/tasklist.
 17. Once all service tasks are completed and the payment failed, you will see a task under **All Tasks**.
 18. Select the task and inspect the data on the form.
 19. In case you miss some data or see any errors, you can change the form in the Modeler and redeploy the form. If you refresh the page in the tasklist the view will update to the latest form.
 20. Open the Diagram tab of the form to see the highlighted task of the current process instance.
 21. Switch back to the Form tab to work on the data.
 22. Claim the task in the Tasklist. You can now edit the values.
-23. As the current error is not resolveable, keep the checkbox unchecked and complete the form.
+23. As the current error is not resolvable, keep the checkbox unchecked and complete the form.
 
 ### Summary
 
