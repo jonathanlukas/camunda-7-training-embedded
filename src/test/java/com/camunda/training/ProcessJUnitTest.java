@@ -24,10 +24,13 @@ public class ProcessJUnitTest {
   public void setup() {
     Mocks.register("deductCredit", new DeductCreditDelegate(new CustomerService()));
     Mocks.register("chargeCreditCard", new ChargeCreditCardDelegate(new CreditCardService()));
+    Mocks.register("paymentRequest", new SendPaymentRequestDelegate());
+    Mocks.register("paymentCompletion", new SendPaymentCompletionDelegate());
   }
   @Test
   @Deployment(resources = "payment_process.bpmn")
   public void testHappyPath() {
+    Mocks.register("paymentCompletion", (JavaDelegate) ex -> {});
     // Create a HashMap to put in variables for the process instance
     Map<String, Object> variables = new HashMap<String, Object>();
     variables.put("orderTotal", 30.00);
@@ -44,6 +47,7 @@ public class ProcessJUnitTest {
   @Test
   @Deployment(resources = "payment_process.bpmn")
   public void testCreditSufficient(){
+    Mocks.register("paymentCompletion", (JavaDelegate) ex -> {});
     Map<String, Object> variables = new HashMap<>();
     variables.put("openAmount", 0);
     ProcessInstance processInstance = runtimeService()
