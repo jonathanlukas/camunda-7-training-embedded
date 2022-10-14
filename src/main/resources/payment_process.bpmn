@@ -37,6 +37,9 @@
       <bpmn:incoming>Flow_0dht3xx</bpmn:incoming>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0ldd1ti" camunda:delegateExpression="${paymentCompletion}" />
     </bpmn:endEvent>
+    <bpmn:boundaryEvent id="Event_0y9fua4" name="Charging failed" attachedToRef="Activity_Charge_Credit_Card">
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_0eao8oo" />
+    </bpmn:boundaryEvent>
   </bpmn:process>
   <bpmn:message id="Message_26qs73r" name="paymentRequestMessage" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -66,6 +69,12 @@
         <dc:Bounds x="772" y="122" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="746" y="165" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_139on27_di" bpmnElement="Event_0y9fua4">
+        <dc:Bounds x="592" y="232" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="573" y="275" width="74" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_16d4uce_di" bpmnElement="Flow_16d4uce">
