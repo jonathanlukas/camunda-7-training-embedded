@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_096sckt" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.4.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
   <bpmn:process id="PaymentProcess" name="Payment process" isExecutable="true">
-    <bpmn:startEvent id="StartEvent_Payment_Required" name="payment required">
-      <bpmn:outgoing>Flow_16d4uce</bpmn:outgoing>
-    </bpmn:startEvent>
     <bpmn:sequenceFlow id="Flow_16d4uce" sourceRef="StartEvent_Payment_Required" targetRef="Activity_Deduct_Amount" />
     <bpmn:exclusiveGateway id="Gateway_Amount_Fully_Paid" name="amount fully paid?">
       <bpmn:incoming>Flow_0sjnn4o</bpmn:incoming>
@@ -35,15 +32,14 @@
       <bpmn:incoming>Flow_03f9xw3</bpmn:incoming>
       <bpmn:outgoing>Flow_1laatrd</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:startEvent id="StartEvent_Payment_Required" name="payment required">
+      <bpmn:outgoing>Flow_16d4uce</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0080t7c" messageRef="Message_26qs73r" />
+    </bpmn:startEvent>
   </bpmn:process>
+  <bpmn:message id="Message_26qs73r" name="paymentRequestMessage" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="PaymentProcess">
-      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_Payment_Required">
-        <dc:Bounds x="162" y="122" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="137" y="165" width="86" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0noksw6_di" bpmnElement="Gateway_Amount_Fully_Paid" isMarkerVisible="true">
         <dc:Bounds x="405" y="115" width="50" height="50" />
         <bpmndi:BPMNLabel>
@@ -64,6 +60,12 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_07y4w5d_di" bpmnElement="Activity_Charge_Credit_Card">
         <dc:Bounds x="510" y="170" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0b68y88_di" bpmnElement="StartEvent_Payment_Required">
+        <dc:Bounds x="162" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="137" y="165" width="86" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_16d4uce_di" bpmnElement="Flow_16d4uce">
         <di:waypoint x="198" y="140" />
