@@ -45,7 +45,7 @@ In this lab, we will write an end-to-end test for the order process and the paym
    ```
 5. For the end-to-end test, this will not work as we only have the process instance of the order process available. We need to query the process instance of the payment process before to do the assertion and execute the job:
    ```java
-   assertThat(processInstance).isWaitingAt("Event_0odziae");
+   assertThat(processInstance).isWaitingAt(<payment completed event id>);
    ProcessInstance paymentProcess = processInstanceQuery().processDefinitionKey("PaymentProcess").singleResult();
    assertThat(paymentProcess).isWaitingAt("StartEvent_Payment_Required");
    execute(job());

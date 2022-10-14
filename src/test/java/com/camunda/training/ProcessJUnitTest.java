@@ -121,6 +121,11 @@ public class ProcessJUnitTest {
             "09/24"
         )
     );
+    assertThat(processInstance).isWaitingAt("PaymentCompletedEvent");
+    ProcessInstance paymentProcess = processInstanceQuery().processDefinitionKey("PaymentProcess").singleResult();
+    assertThat(paymentProcess).isWaitingAt("StartEvent_Payment_Required");
+    execute(job());
+    assertThat(paymentProcess).isEnded();
     assertThat(processInstance).isEnded();
   }
 
