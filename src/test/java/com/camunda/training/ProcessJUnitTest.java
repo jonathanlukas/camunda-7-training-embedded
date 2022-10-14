@@ -99,4 +99,25 @@ public class ProcessJUnitTest {
     assertThat(exception).hasMessage("CVC invalid!");
   }
 
+  @Test
+  @Deployment(resources = {"order_process.bpmn","payment_process.bpmn"})
+  public void testEndToEnd(){
+    ProcessInstance processInstance = runtimeService().startProcessInstanceByKey(
+        "OrderProcess",
+        "Test 1",
+        withVariables("orderTotal",
+            30.00,
+            "customerId",
+            "cust30",
+            "cardNumber",
+            "1234 5678",
+            "CVC",
+            "123",
+            "expiryDate",
+            "09/24"
+        )
+    );
+    assertThat(processInstance).isEnded();
+  }
+
 }
