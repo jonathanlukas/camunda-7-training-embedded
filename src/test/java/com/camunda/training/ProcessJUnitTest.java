@@ -45,6 +45,9 @@ public class ProcessJUnitTest {
     ProcessInstance processInstance = runtimeService().startProcessInstanceByKey("PaymentProcess", variables);
     assertThat(processInstance).isWaitingAt("StartEvent_Payment_Required");
     execute(job());
+    // execute the external task, there is an open amount
+    assertThat(processInstance).isWaitingAt("Activity_Deduct_Amount");
+    complete(externalTask(),withVariables("openAmount",10D));
     // assert that the process is waiting at charge credit card
     assertThat(processInstance).isWaitingAt("Activity_Charge_Credit_Card");
     execute(job());
@@ -110,6 +113,9 @@ public class ProcessJUnitTest {
     // try to execute credit card payment
     assertThat(processInstance).isWaitingAt("StartEvent_Payment_Required");
     execute(job());
+    // execute the external task, there is an open amount
+    assertThat(processInstance).isWaitingAt("Activity_Deduct_Amount");
+    complete(externalTask(),withVariables("openAmount",10D));
     assertThat(processInstance).isWaitingAt("Activity_Charge_Credit_Card");
     RuntimeException exception = assertThrows(RuntimeException.class, () -> execute(job()));
     assertThat(exception).hasMessage("CVC invalid!");
@@ -138,6 +144,9 @@ public class ProcessJUnitTest {
         .singleResult();
     assertThat(paymentProcess).isWaitingAt("StartEvent_Payment_Required");
     execute(job());
+    // execute the external task, there is an open amount
+    assertThat(paymentProcess).isWaitingAt("Activity_Deduct_Amount");
+    complete(externalTask(),withVariables("openAmount",0D));
     assertThat(paymentProcess).isEnded();
     assertThat(processInstance).isEnded();
   }
@@ -156,6 +165,9 @@ public class ProcessJUnitTest {
     ProcessInstance processInstance = runtimeService().startProcessInstanceByKey("PaymentProcess", variables);
     assertThat(processInstance).isWaitingAt("StartEvent_Payment_Required");
     execute(job());
+    // execute the external task, there is an open amount
+    assertThat(processInstance).isWaitingAt("Activity_Deduct_Amount");
+    complete(externalTask(),withVariables("openAmount",10D));
     assertThat(processInstance).isWaitingAt("Activity_Charge_Credit_Card");
     execute(job());
     // complete the user task, let the payment fail

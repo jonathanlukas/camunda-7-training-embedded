@@ -12,8 +12,8 @@ Add implementations for an external task service.
 3. Enter a topic like `creditDeduction`
 
 ### Spring Boot application
-1. Create a new maven project.
-2. Enter your IDE and open the pom.xml of your project and add these dependencies:
+4. Create a new maven project.
+5. Enter your IDE and open the pom.xml of your project and add these dependencies:
 ```
 <dependencies>
 <dependency>
@@ -28,7 +28,7 @@ Add implementations for an external task service.
 </dependency>
 </dependencies>
 ```
-3. Create an new Spring Boot application class. It should implement the `main()` method. The final code looks like this:
+6. Create an new Spring Boot application class. It should implement the `main()` method. The final code looks like this:
 ```java
 @SpringBootApplication
 public class ExternalTaskWorkerApplication {
@@ -38,8 +38,8 @@ public class ExternalTaskWorkerApplication {
   }
 }
 ```
-4. Create a configuration file. Enter the src/main/resources directory and create a file named application.yml.
-5. Add the content for the basic configuration
+7. Create a configuration file. Enter the src/main/resources directory and create a file named application.yml.
+8. Add the content for the basic configuration
 ```yaml
 camunda.bpm.client:
   base-url: http://localhost:8080/engine-rest
@@ -52,7 +52,7 @@ logging:
 ```
 
 ### External Task worker
-1. Add a bean for the external task worker for the `creditDeduction` topic. For now, we log the invocation and simply set openAmount to 0:
+9. Add a bean for the external task worker for the `creditDeduction` topic. For now, we log the invocation and simply set openAmount to 0:
 ```java
 @SpringBootApplication
 public class ExternalTaskWorkerApplication {
@@ -74,7 +74,24 @@ public class ExternalTaskWorkerApplication {
   }
 }
 ```
-2. Start your process application.
-3. Start your worker
-4. Start a new process instance.
-5. Enter the IDE and check the console output of your external task worker. You should find the log statement from your handler: We received external task yyyyyyyy.
+10. Start your process application.
+11. Start your worker
+12. Start a new process instance.
+13. Enter the IDE and check the console output of your external task worker. You should find the log statement from your handler: We received external task yyyyyyyy.
+
+### Junit tests
+
+14. Run your Junit tests. Many of them fail. This is because the external task is a natural wait state. We can fix our tests by adding snippets right before the point where the test fails:
+    
+    This snippet serves if the process should charge the credit card:
+    ```java
+    // execute the external task, there is an open amount
+    assertThat(processInstance).isWaitingAt("Activity_Deduct_Amount");
+    complete(externalTask(),withVariables("openAmount", 10D));
+    ```
+    This snippet serves if the process should NOT charge the credit card:
+    ```java
+    // execute the external task, there is an open amount
+    assertThat(processInstance).isWaitingAt("Activity_Deduct_Amount");
+    complete(externalTask(),withVariables("openAmount", 0D));
+    ```
