@@ -133,6 +133,14 @@ public class ProcessJUnitTest {
   @Deployment(resources = "payment_process.bpmn")
   public void testInvalidExpiryDate() {
     Mocks.register("paymentCompletion", (JavaDelegate)execution -> {});
+    Map<String, Object> variables = new HashMap<String, Object>();
+    variables.put("orderTotal", 30.00);
+    variables.put("customerId", "cust20");
+    variables.put("cardNumber", "1234 5678");
+    variables.put("CVC","123");
+    variables.put("expiryDate","09/241");
+    // Start process with Java API and variables
+    ProcessInstance processInstance = runtimeService().startProcessInstanceByKey("PaymentProcess", variables);
   }
 
 }
