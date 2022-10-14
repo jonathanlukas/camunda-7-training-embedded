@@ -27,6 +27,7 @@
     </bpmn:serviceTask>
     <bpmn:serviceTask id="Activity_Charge_Credit_Card" name="charge credit card" camunda:asyncBefore="true" camunda:delegateExpression="${chargeCreditCard}">
       <bpmn:incoming>Flow_03f9xw3</bpmn:incoming>
+      <bpmn:incoming>Flow_04jlbvz</bpmn:incoming>
       <bpmn:outgoing>Flow_1laatrd</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:startEvent id="StartEvent_Payment_Required" name="payment required" camunda:asyncBefore="true">
@@ -58,10 +59,12 @@
     <bpmn:exclusiveGateway id="Gateway_06d7eqi" name="Resolveable?">
       <bpmn:incoming>Flow_19btlfp</bpmn:incoming>
       <bpmn:outgoing>Flow_0mz8l69</bpmn:outgoing>
+      <bpmn:outgoing>Flow_04jlbvz</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="Flow_0mz8l69" name="no" sourceRef="Gateway_06d7eqi" targetRef="Event_1r3jy4t">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${errorResolved == false}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_04jlbvz" name="yes" sourceRef="Gateway_06d7eqi" targetRef="Activity_Charge_Credit_Card" />
     <bpmn:association id="Association_11h1zr8" associationDirection="One" sourceRef="Event_1ugm5sk" targetRef="Activity_0hb5duq" />
   </bpmn:process>
   <bpmn:message id="Message_26qs73r" name="paymentRequestMessage" />
@@ -111,7 +114,7 @@
       <bpmndi:BPMNShape id="Gateway_06d7eqi_di" bpmnElement="Gateway_06d7eqi" isMarkerVisible="true">
         <dc:Bounds x="795" y="305" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="787" y="362" width="67" height="14" />
+          <dc:Bounds x="786" y="281" width="67" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_11h1zr8_di" bpmnElement="Association_11h1zr8">
@@ -174,6 +177,16 @@
         <di:waypoint x="912" y="330" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="872" y="312" width="13" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04jlbvz_di" bpmnElement="Flow_04jlbvz">
+        <di:waypoint x="820" y="355" />
+        <di:waypoint x="820" y="430" />
+        <di:waypoint x="480" y="430" />
+        <di:waypoint x="480" y="230" />
+        <di:waypoint x="510" y="230" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="831" y="383" width="18" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
