@@ -25,12 +25,16 @@ Add a Business Rule Task to the order process and calculate a discount to the or
 orderTotal - (orderTotal * discount / 100)
 ```
 14. Name the Result variable **discountedAmount**.
-15. To pay only the discounted amount, map the order total that is passed to the payment process with an Input mapping on the **Invoke payment** task. In the **paymentRequest** worker, the local variable is preferred over the process variable. Select the Invoke payment task.
+15. To pay only the discounted amount, map the order total that is passed to the payment process with an Input mapping on the **Invoke payment** task. In the **paymentRequest** implementation, the local variable is preferred over the process variable. Select the Invoke payment task.
 16. Enter the Input section. Click on the + to add an input mapping. Enter **orderTotal** as the Local variable name. Select String or Expression as the Assignment type. Enter **${discountedAmount}** as the Value with the expression to access the result from the decision evaluation.
 
 ### Acceptance Test
 17. Start a process instance.
 18. Enter Cockpit and check the history of the order and the payment process. Is the discount applied correctly?
+
+### Junit tests
+
+19. Run your Junit tests. They are failing as they are missing the deployment of the dmn file. Add the file to the deployed resources.
 
 ### Summary
 In this exercise you have modeled a DMN decision table to get a discount for a given order amount. You connected the decision table with a Business Rules Task to the order process. A new Script Task applied the discount to the order total. The discounted amount was mapped as with an input mapping as the orderTotal amount to the payment process.
