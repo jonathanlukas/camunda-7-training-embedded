@@ -8,6 +8,38 @@
         </inputExpression>
       </input>
       <output id="Output_1" label="Discount percentage" name="discount" typeRef="integer" />
+      <rule id="DecisionRule_0dxn98c">
+        <inputEntry id="UnaryTests_0kw6qvz">
+          <text>&lt; 40.00</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0toptzi">
+          <text>0</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0klbguv">
+        <inputEntry id="UnaryTests_1m807i3">
+          <text>[40.00..60.00[</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0yryg61">
+          <text>2</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1xc5zlc">
+        <inputEntry id="UnaryTests_1t6qmpv">
+          <text>[60.00..100.00[</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_12fd8nx">
+          <text>3</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0jctblm">
+        <inputEntry id="UnaryTests_06k90gp">
+          <text>&gt;= 100.00</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0i3yb2l">
+          <text>4</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
   <dmndi:DMNDI>
