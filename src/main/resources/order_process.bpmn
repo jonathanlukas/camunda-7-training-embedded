@@ -1,46 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1bnaxmc" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.4.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.18.0">
-  <bpmn:process id="Process_0p8v667" isExecutable="true">
-    <bpmn:startEvent id="StartEvent_1" name="Order received">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1bnaxmc" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.4.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.18.0">
+  <bpmn:process id="OrderProcess" name="Order Process" isExecutable="true" camunda:historyTimeToLive="30">
+    <bpmn:startEvent id="OrderReceivedStartEvent" name="Order received">
       <bpmn:outgoing>Flow_08huam4</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_08huam4" sourceRef="StartEvent_1" targetRef="Activity_1egwhp2" />
-    <bpmn:sequenceFlow id="Flow_05ylx1l" sourceRef="Activity_1egwhp2" targetRef="Event_0vlhsgm" />
-    <bpmn:intermediateCatchEvent id="Event_0vlhsgm" name="Payment completed">
+    <bpmn:sequenceFlow id="Flow_08huam4" sourceRef="OrderReceivedStartEvent" targetRef="InvokePaymentTask" />
+    <bpmn:sequenceFlow id="Flow_05ylx1l" sourceRef="InvokePaymentTask" targetRef="PaymentCompletedEvent" />
+    <bpmn:intermediateCatchEvent id="PaymentCompletedEvent" name="Payment completed">
       <bpmn:incoming>Flow_05ylx1l</bpmn:incoming>
       <bpmn:outgoing>Flow_0rq6vhf</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_13sj0o3" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_13sj0o3" messageRef="Message_21j7h5o" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:endEvent id="Event_0n1m25l" name="Order completed">
+    <bpmn:endEvent id="OrderCompletedEndEvent" name="Order completed">
       <bpmn:incoming>Flow_0rq6vhf</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_0rq6vhf" sourceRef="Event_0vlhsgm" targetRef="Event_0n1m25l" />
-    <bpmn:sendTask id="Activity_1egwhp2" name="Invoke payment">
+    <bpmn:sequenceFlow id="Flow_0rq6vhf" sourceRef="PaymentCompletedEvent" targetRef="OrderCompletedEndEvent" />
+    <bpmn:sendTask id="InvokePaymentTask" name="Invoke payment" camunda:delegateExpression="${paymentRequest}">
       <bpmn:incoming>Flow_08huam4</bpmn:incoming>
       <bpmn:outgoing>Flow_05ylx1l</bpmn:outgoing>
     </bpmn:sendTask>
   </bpmn:process>
+  <bpmn:message id="Message_21j7h5o" name="paymentCompletedMessage" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0p8v667">
-      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="OrderProcess">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="OrderReceivedStartEvent">
         <dc:Bounds x="179" y="99" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="161" y="142" width="73" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_13wyf35_di" bpmnElement="Event_0vlhsgm">
+      <bpmndi:BPMNShape id="Event_13wyf35_di" bpmnElement="PaymentCompletedEvent">
         <dc:Bounds x="432" y="99" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="425" y="142" width="51" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0n1m25l_di" bpmnElement="Event_0n1m25l">
+      <bpmndi:BPMNShape id="Event_0n1m25l_di" bpmnElement="OrderCompletedEndEvent">
         <dc:Bounds x="532" y="99" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="509" y="142" width="82" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1av92f5_di" bpmnElement="Activity_1egwhp2">
+      <bpmndi:BPMNShape id="Activity_1av92f5_di" bpmnElement="InvokePaymentTask">
         <dc:Bounds x="270" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_08huam4_di" bpmnElement="Flow_08huam4">
