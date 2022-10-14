@@ -38,7 +38,7 @@ In this lab, you will throw an exception and then refactor the process to handle
       // try to execute credit card payment
       assertThat(processInstance).isWaitingAt("Activity_Charge_Credit_Card");
       RuntimeException exception = assertThrows(RuntimeException.class, () -> execute(job()));
-      Assertions.assertThat(exception).hasMessage("CVC invalid!");
+      assertThat(exception).hasMessage("CVC invalid!");
     }
     ```
 4. Run only this test. This should work.
