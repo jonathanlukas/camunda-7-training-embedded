@@ -17,7 +17,7 @@ In this lab, we will include compensation to show that a task is compensated aft
 2. Morph this **End Event** to be a **Compensate End Event**.
 3. Now, add a **Boundary Event** to the **deduct amount from credit** task.
 4. Morph the **Boundary Event** to a **Compensate Boundary Event**.
-5. In the context of this **Compensate Boundary Event**, create a Task. This task will not be connected with a sequence flow, but with a **Association** (which is correct and wanted).
+5. In the context of this **Compensate Boundary Event**, create a Task. This task will not be connected with a sequence flow, but with a **Association** (which is correct and wanted). Name this task **refund credit amount**.
 6. Now go to your tests. Add another statement to the last assert statement so that the whole statement will look like this:
     ```java
    assertThat(processInstance)

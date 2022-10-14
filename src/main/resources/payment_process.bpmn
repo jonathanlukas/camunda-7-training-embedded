@@ -49,6 +49,8 @@
     <bpmn:boundaryEvent id="Event_1ugm5sk" attachedToRef="Activity_Deduct_Amount">
       <bpmn:compensateEventDefinition id="CompensateEventDefinition_1l3qwn7" />
     </bpmn:boundaryEvent>
+    <bpmn:task id="Activity_0hb5duq" name="refund credit amount" isForCompensation="true" />
+    <bpmn:association id="Association_11h1zr8" associationDirection="One" sourceRef="Event_1ugm5sk" targetRef="Activity_0hb5duq" />
   </bpmn:process>
   <bpmn:message id="Message_26qs73r" name="paymentRequestMessage" />
   <bpmn:error id="Error_0zi4xgc" name="Charging failed" errorCode="chargingError" />
@@ -87,6 +89,15 @@
           <dc:Bounds x="754" y="355" width="72" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0hb5duq_di" bpmnElement="Activity_0hb5duq">
+        <dc:Bounds x="370" y="220" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_11h1zr8_di" bpmnElement="Association_11h1zr8">
+        <di:waypoint x="300" y="198" />
+        <di:waypoint x="300" y="260" />
+        <di:waypoint x="370" y="260" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_139on27_di" bpmnElement="Event_0y9fua4">
         <dc:Bounds x="592" y="232" width="36" height="36" />
         <bpmndi:BPMNLabel>
