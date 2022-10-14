@@ -129,4 +129,10 @@ public class ProcessJUnitTest {
     assertThat(processInstance).isEnded();
   }
 
+  @Test
+  @Deployment(resources = "payment_process.bpmn")
+  public void testInvalidExpiryDate() {
+
+  }
+
 }
