@@ -141,6 +141,14 @@ public class ProcessJUnitTest {
     variables.put("expiryDate","09/241");
     // Start process with Java API and variables
     ProcessInstance processInstance = runtimeService().startProcessInstanceByKey("PaymentProcess", variables);
+    assertThat(processInstance).isWaitingAt("StartEvent_Payment_Required");
+    execute(job());
+    assertThat(processInstance).isWaitingAt("Activity_Charge_Credit_Card");
+    execute(job());
+    // Make assertions on the process instance
+    assertThat(processInstance).isEnded().hasPassed("Activity_Charge_Credit_Card")
+                               .hasNotPassed("Event_Payment_Complete")
+                               .hasPassed("Event_1r3jy4t");
   }
 
 }
