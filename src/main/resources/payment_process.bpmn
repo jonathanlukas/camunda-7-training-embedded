@@ -21,7 +21,7 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${openAmount == 0}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_0dht3xx" sourceRef="Gateway_03qjfwl" targetRef="Event_Payment_Complete" />
-    <bpmn:serviceTask id="Activity_Deduct_Amount" name="deduct amount&#10;from credit" camunda:delegateExpression="${deductCredit}">
+    <bpmn:serviceTask id="Activity_Deduct_Amount" name="deduct amount&#10;from credit" camunda:type="external" camunda:topic="creditDeduction">
       <bpmn:incoming>Flow_16d4uce</bpmn:incoming>
       <bpmn:outgoing>Flow_0sjnn4o</bpmn:outgoing>
     </bpmn:serviceTask>
