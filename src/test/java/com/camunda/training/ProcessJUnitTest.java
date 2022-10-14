@@ -40,4 +40,10 @@ public class ProcessJUnitTest {
     assertThat(processInstance).isEnded().hasPassed("Activity_Charge_Credit_Card");
   }
 
+  @Test
+  @Deployment(resources = "payment_process.bpmn")
+  public void testCreditSufficient(){
+    // the test is written in here
+  }
+
 }
