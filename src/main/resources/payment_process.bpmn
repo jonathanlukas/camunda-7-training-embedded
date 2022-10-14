@@ -59,7 +59,9 @@
       <bpmn:incoming>Flow_19btlfp</bpmn:incoming>
       <bpmn:outgoing>Flow_0mz8l69</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="Flow_0mz8l69" name="no" sourceRef="Gateway_06d7eqi" targetRef="Event_1r3jy4t" />
+    <bpmn:sequenceFlow id="Flow_0mz8l69" name="no" sourceRef="Gateway_06d7eqi" targetRef="Event_1r3jy4t">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${errorResolved == false}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:association id="Association_11h1zr8" associationDirection="One" sourceRef="Event_1ugm5sk" targetRef="Activity_0hb5duq" />
   </bpmn:process>
   <bpmn:message id="Message_26qs73r" name="paymentRequestMessage" />
