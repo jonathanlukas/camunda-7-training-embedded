@@ -38,10 +38,11 @@
       <bpmn:messageEventDefinition id="MessageEventDefinition_0ldd1ti" camunda:delegateExpression="${paymentCompletion}" />
     </bpmn:endEvent>
     <bpmn:boundaryEvent id="Event_0y9fua4" name="Charging failed" attachedToRef="Activity_Charge_Credit_Card">
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_0eao8oo" />
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_0eao8oo" errorRef="Error_0zi4xgc" camunda:errorCodeVariable="errorCode" camunda:errorMessageVariable="errorVariable" />
     </bpmn:boundaryEvent>
   </bpmn:process>
   <bpmn:message id="Message_26qs73r" name="paymentRequestMessage" />
+  <bpmn:error id="Error_0zi4xgc" name="Charging failed" errorCode="chargingError" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="PaymentProcess">
       <bpmndi:BPMNShape id="Gateway_0noksw6_di" bpmnElement="Gateway_Amount_Fully_Paid" isMarkerVisible="true">
