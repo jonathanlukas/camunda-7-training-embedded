@@ -51,7 +51,7 @@
     </bpmn:boundaryEvent>
     <bpmn:task id="Activity_0hb5duq" name="refund credit amount" isForCompensation="true" />
     <bpmn:sequenceFlow id="Flow_19btlfp" sourceRef="Activity_0zjqbi4" targetRef="Event_1r3jy4t" />
-    <bpmn:userTask id="Activity_0zjqbi4" name="Check failed payment data">
+    <bpmn:userTask id="Activity_0zjqbi4" name="Check failed payment data" camunda:candidateGroups="accounting">
       <bpmn:incoming>Flow_1na5xaw</bpmn:incoming>
       <bpmn:outgoing>Flow_19btlfp</bpmn:outgoing>
     </bpmn:userTask>
