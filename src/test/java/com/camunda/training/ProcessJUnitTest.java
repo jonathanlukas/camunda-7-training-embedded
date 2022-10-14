@@ -2,6 +2,7 @@ package com.camunda.training;
 
 import com.camunda.training.services.CreditCardService;
 import com.camunda.training.services.CustomerService;
+import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.mock.Mocks;
@@ -53,6 +54,22 @@ public class ProcessJUnitTest {
     assertThat(processInstance)
         .isEnded()
         .hasNotPassed("Activity_Charge_Credit_Card");
+  }
+
+  @Test
+  @Deployment(resources = "order_process.bpmn")
+  public void testOrderProcess() {
+    // I will not start the other process now
+    Mocks.register("paymentRequest", (JavaDelegate) execution -> {});
+    ProcessInstance processInstance = runtimeService().startProcessInstanceByKey("OrderProcess", "Test 1", withVariables(
+        "orderTotal",        30.00,
+        "customerId",        "cust30",
+        "cardNumber",        "1234 5678",
+        "CVC",        "123",
+        "expiryDate",        "09/24"
+    ));
+    runtimeService().correlateMessage("paymentCompletedMessage");
+    assertThat(processInstance).isEnded();
   }
 
 }
