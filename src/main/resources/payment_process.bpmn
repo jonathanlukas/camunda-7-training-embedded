@@ -44,7 +44,7 @@
     <bpmn:sequenceFlow id="Flow_1na5xaw" sourceRef="Event_0y9fua4" targetRef="Event_1r3jy4t" />
     <bpmn:endEvent id="Event_1r3jy4t" name="payment failed">
       <bpmn:incoming>Flow_1na5xaw</bpmn:incoming>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_0baedqv" camunda:delegateExpression="${paymentCompletion}" />
+      <bpmn:compensateEventDefinition id="CompensateEventDefinition_1p1hn8p" />
     </bpmn:endEvent>
   </bpmn:process>
   <bpmn:message id="Message_26qs73r" name="paymentRequestMessage" />
@@ -78,7 +78,7 @@
           <dc:Bounds x="746" y="165" width="90" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_10d0nty_di" bpmnElement="Event_1r3jy4t">
+      <bpmndi:BPMNShape id="Event_04oaiv7_di" bpmnElement="Event_1r3jy4t">
         <dc:Bounds x="772" y="312" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="754" y="355" width="72" height="14" />
