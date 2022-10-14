@@ -38,6 +38,15 @@ You have to define what dat should be displayed on that forms.
 22. Claim the task in the Tasklist. You can now edit the values.
 23. As the current error is not resolvable, keep the checkbox unchecked and complete the form.
 
+### Junit tests
+
+24. Run your Junit tests. `testInvalidExpiryDate` should fail. This is because a user task is a natural wait state. Add this snippet right before it fails:
+```java
+// complete the user task, let the payment fail
+assertThat(processInstance).isWaitingAt("Activity_0zjqbi4");
+complete(task(), withVariables("errorResolved", false));
+```
+
 ### Summary
 
 In this exercise you have added a user task to the process and created a Form to display the process variables. These variables contain details of the error. The user can provide a decision if the credit card should be chared again or the payment failed.
