@@ -20,7 +20,7 @@
       <bpmn:outgoing>Flow_05ylx1l</bpmn:outgoing>
     </bpmn:sendTask>
     <bpmn:sequenceFlow id="Flow_0wymlz3" sourceRef="Activity_1s0jxjb" targetRef="InvokePaymentTask" />
-    <bpmn:businessRuleTask id="Activity_1s0jxjb" name="Get discount">
+    <bpmn:businessRuleTask id="Activity_1s0jxjb" name="Get discount" camunda:resultVariable="discount" camunda:decisionRef="orderDiscount" camunda:mapDecisionResult="singleEntry">
       <bpmn:incoming>Flow_08huam4</bpmn:incoming>
       <bpmn:outgoing>Flow_0wymlz3</bpmn:outgoing>
     </bpmn:businessRuleTask>
