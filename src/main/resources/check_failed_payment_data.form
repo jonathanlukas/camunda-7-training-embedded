@@ -42,6 +42,12 @@
       "id": "Field_0lzt4iy",
       "key": "openAmount",
       "disabled": true
+    },
+    {
+      "label": "Error resolved?",
+      "type": "checkbox",
+      "id": "Field_145yudj",
+      "key": "errorResolved"
     }
   ],
   "type": "default",
