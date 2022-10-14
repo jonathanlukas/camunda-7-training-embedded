@@ -74,7 +74,7 @@ public class ProcessJUnitTest {
   }
 
   @Test
-  @Deployment(resources = "order_process.bpmn")
+  @Deployment(resources = { "order_process.bpmn", "order_discount.dmn" })
   public void testOrderProcess() {
     // I will not start the other process now
     Mocks.register("paymentRequest", (JavaDelegate) execution -> {});
@@ -122,7 +122,7 @@ public class ProcessJUnitTest {
   }
 
   @Test
-  @Deployment(resources = { "order_process.bpmn", "payment_process.bpmn" })
+  @Deployment(resources = { "order_process.bpmn", "payment_process.bpmn", "order_discount.dmn" })
   public void testEndToEnd() {
     ProcessInstance processInstance = runtimeService().startProcessInstanceByKey("OrderProcess",
         "Test 1",
