@@ -43,18 +43,23 @@
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="Flow_1na5xaw" sourceRef="Event_0y9fua4" targetRef="Activity_0zjqbi4" />
     <bpmn:endEvent id="Event_1r3jy4t" name="payment failed">
-      <bpmn:incoming>Flow_19btlfp</bpmn:incoming>
+      <bpmn:incoming>Flow_0mz8l69</bpmn:incoming>
       <bpmn:compensateEventDefinition id="CompensateEventDefinition_1p1hn8p" />
     </bpmn:endEvent>
     <bpmn:boundaryEvent id="Event_1ugm5sk" attachedToRef="Activity_Deduct_Amount">
       <bpmn:compensateEventDefinition id="CompensateEventDefinition_1l3qwn7" />
     </bpmn:boundaryEvent>
     <bpmn:task id="Activity_0hb5duq" name="refund credit amount" isForCompensation="true" />
-    <bpmn:sequenceFlow id="Flow_19btlfp" sourceRef="Activity_0zjqbi4" targetRef="Event_1r3jy4t" />
+    <bpmn:sequenceFlow id="Flow_19btlfp" sourceRef="Activity_0zjqbi4" targetRef="Gateway_06d7eqi" />
     <bpmn:userTask id="Activity_0zjqbi4" name="Check failed payment data" camunda:formRef="checkPaymentDataForm" camunda:formRefBinding="latest" camunda:candidateGroups="accounting">
       <bpmn:incoming>Flow_1na5xaw</bpmn:incoming>
       <bpmn:outgoing>Flow_19btlfp</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:exclusiveGateway id="Gateway_06d7eqi" name="Resolveable?">
+      <bpmn:incoming>Flow_19btlfp</bpmn:incoming>
+      <bpmn:outgoing>Flow_0mz8l69</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0mz8l69" name="no" sourceRef="Gateway_06d7eqi" targetRef="Event_1r3jy4t" />
     <bpmn:association id="Association_11h1zr8" associationDirection="One" sourceRef="Event_1ugm5sk" targetRef="Activity_0hb5duq" />
   </bpmn:process>
   <bpmn:message id="Message_26qs73r" name="paymentRequestMessage" />
@@ -100,6 +105,12 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1krbf6w_di" bpmnElement="Activity_0zjqbi4">
         <dc:Bounds x="640" y="290" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_06d7eqi_di" bpmnElement="Gateway_06d7eqi" isMarkerVisible="true">
+        <dc:Bounds x="795" y="305" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="787" y="362" width="67" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_11h1zr8_di" bpmnElement="Association_11h1zr8">
         <di:waypoint x="300" y="198" />
@@ -154,7 +165,14 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_19btlfp_di" bpmnElement="Flow_19btlfp">
         <di:waypoint x="740" y="330" />
+        <di:waypoint x="795" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0mz8l69_di" bpmnElement="Flow_0mz8l69">
+        <di:waypoint x="845" y="330" />
         <di:waypoint x="912" y="330" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="872" y="312" width="13" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
