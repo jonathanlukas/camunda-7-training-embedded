@@ -41,6 +41,8 @@ public class ProcessJUnitTest {
     variables.put("expiryDate","09/24");
     // Start process with Java API and variables
     ProcessInstance processInstance = runtimeService().startProcessInstanceByKey("PaymentProcess", variables);
+    assertThat(processInstance).isWaitingAt("StartEvent_Payment_Required");
+    execute(job());
     // assert that the process is waiting at charge credit card
     assertThat(processInstance).isWaitingAt("Activity_Charge_Credit_Card");
     execute(job());
@@ -94,6 +96,8 @@ public class ProcessJUnitTest {
     // Start process with Java API and variables
     ProcessInstance processInstance = runtimeService().startProcessInstanceByKey("PaymentProcess", variables);
     // try to execute credit card payment
+    assertThat(processInstance).isWaitingAt("StartEvent_Payment_Required");
+    execute(job());
     assertThat(processInstance).isWaitingAt("Activity_Charge_Credit_Card");
     RuntimeException exception = assertThrows(RuntimeException.class, () -> execute(job()));
     assertThat(exception).hasMessage("CVC invalid!");
