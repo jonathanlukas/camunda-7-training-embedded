@@ -17,27 +17,27 @@ You have to define what dat should be displayed on that forms.
 8. Add a condition to the sequence flow: `${errorResolved == true}`.
 
 ### Form modeling
-1. In the Modeler, create a new Form for the Camunda Platform.
-2. In the property panel of the form, change the Id from the generated value to the value you have set in the user task: **checkPaymentDataForm**.
-3. Enter Cockpit and select the last completed process instance of the payment process from the history. Open the Variable tab. All (important) variables should be shown on the form. Additionally a form field for the decision is required.
-4. Drag a Text from the palette onto the canvas to provide a headline. The Text could be like
+9. In the Modeler, create a new Form for the Camunda Platform.
+10. In the property panel of the form, change the Id from the generated value to the value you have set in the user task: **checkPaymentDataForm**.
+11. Enter Cockpit and select the last completed process instance of the payment process from the history. Open the Variable tab. All (important) variables should be shown on the form. Additionally a form field for the decision is required.
+12. Drag a Text from the palette onto the canvas to provide a headline. The Text could be like
 ```
 ### Check the failed payment
 ```
-5. Drag a Text Field for each String type variable. Enter Field labels for the user. Enter Keys matching the process variable names.
-6. Add a Number field for each Double type variable (`orderTotal` and `openAmount`).
-7. Add a Checkbox field for the decision of the user. It should get a Key of **errorResolved** to match the condition of the XOR gateway.
+13. Drag a Text Field for each String type variable. Enter Field labels for the user. Enter Keys matching the process variable names.
+14. Add a Number field for each Double type variable (`orderTotal` and `openAmount`).
+15. Add a Checkbox field for the decision of the user. It should get a Key of **errorResolved** to match the condition of the XOR gateway.
 
 ### Run with Tasklist
-1. Open Tasklist at http://localhost:8080/camunda/app/tasklist.
-2. Once all service tasks are completed and the payment failed, you will see a task under **All Tasks**.
-3. Select the task and inspect the data on the form.
-4. In case you miss some data or see any errors, you can change the form in the Modeler and redeploy the form. If you refresh the page in the tasklist the view will update to the latest form.
-5. Open the Diagram tab of the form to see the highlighted task of the current process instance.
-6. Switch back to the Form tab to work on the data.
-7. Claim the task in the Tasklist. You can now edit the values.
-8. As the current error is not resolveable, keep the checkbox unchecked and complete the form.
+16. Open Tasklist at http://localhost:8080/camunda/app/tasklist.
+17. Once all service tasks are completed and the payment failed, you will see a task under **All Tasks**.
+18. Select the task and inspect the data on the form.
+19. In case you miss some data or see any errors, you can change the form in the Modeler and redeploy the form. If you refresh the page in the tasklist the view will update to the latest form.
+20. Open the Diagram tab of the form to see the highlighted task of the current process instance.
+21. Switch back to the Form tab to work on the data.
+22. Claim the task in the Tasklist. You can now edit the values.
+23. As the current error is not resolveable, keep the checkbox unchecked and complete the form.
 
 ### Summary
 
-In this exercise you have added a user task to the process and created a Form to display the proces variables. These variables contain details of the error. The user can provide a decision if the credit card should be chared again or the payment failed.
+In this exercise you have added a user task to the process and created a Form to display the process variables. These variables contain details of the error. The user can provide a decision if the credit card should be chared again or the payment failed.
