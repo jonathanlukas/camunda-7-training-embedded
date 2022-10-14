@@ -9,7 +9,7 @@ In this exercise you will handle an error that happened in the credit card servi
 ### Process Modeling
 1. Open your payment process in the modeler. Attach a boundary event to the Charge credit card task. Change the event to an Error Boundary Event. Add a label to the error event like **Charging failed**.
 2. Open the property panel for the error boundary event and the open the Error section. Create a Global error reference and fill a name like Charging failed, as code the value **chargingError**, as Code variable **errorCode** and as Message variable **errorMessage**.
-3. For simplicity, add a Message End Event to the error event. Name the message end event Payment failed. For the implementation, select delegate expression and use the same delegate as in the other message end event: **paymentCompletion**.
+3. For simplicity, add a Message End Event to the error event. Name the message end event Payment failed. For the implementation, select delegate expression and use the same delegate as in the other message end event: **${paymentCompletion}**.
 
 ### Updating the Charge Credit Card Delegate
 1. Open the **ChargeCreditCardDelegate**.

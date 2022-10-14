@@ -38,8 +38,14 @@
       <bpmn:messageEventDefinition id="MessageEventDefinition_0ldd1ti" camunda:delegateExpression="${paymentCompletion}" />
     </bpmn:endEvent>
     <bpmn:boundaryEvent id="Event_0y9fua4" name="Charging failed" attachedToRef="Activity_Charge_Credit_Card">
+      <bpmn:outgoing>Flow_1na5xaw</bpmn:outgoing>
       <bpmn:errorEventDefinition id="ErrorEventDefinition_0eao8oo" errorRef="Error_0zi4xgc" camunda:errorCodeVariable="errorCode" camunda:errorMessageVariable="errorVariable" />
     </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_1na5xaw" sourceRef="Event_0y9fua4" targetRef="Event_1r3jy4t" />
+    <bpmn:endEvent id="Event_1r3jy4t" name="payment failed">
+      <bpmn:incoming>Flow_1na5xaw</bpmn:incoming>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0baedqv" camunda:delegateExpression="${paymentCompletion}" />
+    </bpmn:endEvent>
   </bpmn:process>
   <bpmn:message id="Message_26qs73r" name="paymentRequestMessage" />
   <bpmn:error id="Error_0zi4xgc" name="Charging failed" errorCode="chargingError" />
@@ -72,10 +78,16 @@
           <dc:Bounds x="746" y="165" width="90" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_10d0nty_di" bpmnElement="Event_1r3jy4t">
+        <dc:Bounds x="772" y="312" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="754" y="355" width="72" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_139on27_di" bpmnElement="Event_0y9fua4">
         <dc:Bounds x="592" y="232" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="573" y="275" width="74" height="14" />
+          <dc:Bounds x="638" y="243" width="74" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_16d4uce_di" bpmnElement="Flow_16d4uce">
@@ -109,6 +121,11 @@
       <bpmndi:BPMNEdge id="Flow_0dht3xx_di" bpmnElement="Flow_0dht3xx">
         <di:waypoint x="715" y="140" />
         <di:waypoint x="772" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1na5xaw_di" bpmnElement="Flow_1na5xaw">
+        <di:waypoint x="610" y="268" />
+        <di:waypoint x="610" y="330" />
+        <di:waypoint x="772" y="330" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
