@@ -18,7 +18,7 @@ Add a Business Rule Task to the order process and calculate a discount to the or
 ### Process Modeling
 9. Open the order process in the Modeler.
 10. Add a task to the order process to get the discount for the order amount before the payment invocation. Name the task **Get discount**. Change the task type to Business Rule Task.
-11. In the Implementation section of the property panel select DMN as Type. Add the Id of the decision table orderDiscount as Decision reference. Fill the Result variable with discount. Select **singleEntry** as value for Map decision result.
+11. In the Implementation section of the property panel select DMN as Type. Add the Id of the decision table **orderDiscount** as Decision reference. Fill the Result variable with discount. Select **singleEntry** as value for Map decision result.
 12. Add a task between the Get discount and Invoke payment tasks to apply the discount to the order amount. Name the task **Apply discount**.
 13. Change the task type to Script Task. Open the Script section. Enter **javascript** as Format (the script language). Select Inline script as Type. Enter the Script
 ```javascript
