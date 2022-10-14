@@ -26,18 +26,24 @@ You create a new process model to handle orders. The payment gets started by rec
 
 4. Create a new class `SendPaymentRequestDelegate`. It should implement the `JavaDelegate` interface.
     ```java
-    import org.camunda.bpm.engine.delegate.JavaDelegate;
-    
-    @Component("paymentRequest")
-    public class SendPaymentRequestDelegate implements JavaDelegate {
+   package com.camunda.training;
 
-      private static final Logger LOG = LoggerFactory.getLogger(SendPaymentRequestDelegate.class);
-
-      @Override
-      public void execute(DelegateExecution execution) throws Exception {
-        
-      }
-    }
+   import org.camunda.bpm.engine.delegate.DelegateExecution;
+   import org.camunda.bpm.engine.delegate.JavaDelegate;
+   import org.slf4j.Logger;
+   import org.slf4j.LoggerFactory;
+   import org.springframework.stereotype.Component;
+   
+   @Component("paymentRequest")
+   public class SendPaymentRequestDelegate implements JavaDelegate {
+   
+     private static final Logger LOG = LoggerFactory.getLogger(SendPaymentRequestDelegate.class);
+   
+     @Override
+     public void execute(DelegateExecution execution) throws Exception {
+     
+     }
+   }
     ```
 
 5. To send the **paymentRequestMessage** to the payment process and to pass all variables and the business key from the order process to the payment process, add the following implementation in the `execute` method. The result of correlation returns the process instance id of the payment process. It will be saved as a new process variable when the send task gets completed.
