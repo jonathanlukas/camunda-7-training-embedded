@@ -4,7 +4,7 @@
     <bpmn:startEvent id="OrderReceivedStartEvent" name="Order received">
       <bpmn:outgoing>Flow_08huam4</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_08huam4" sourceRef="OrderReceivedStartEvent" targetRef="InvokePaymentTask" />
+    <bpmn:sequenceFlow id="Flow_08huam4" sourceRef="OrderReceivedStartEvent" targetRef="Activity_1s0jxjb" />
     <bpmn:sequenceFlow id="Flow_05ylx1l" sourceRef="InvokePaymentTask" targetRef="PaymentCompletedEvent" />
     <bpmn:intermediateCatchEvent id="PaymentCompletedEvent" name="Payment completed">
       <bpmn:incoming>Flow_05ylx1l</bpmn:incoming>
@@ -16,9 +16,14 @@
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_0rq6vhf" sourceRef="PaymentCompletedEvent" targetRef="OrderCompletedEndEvent" />
     <bpmn:sendTask id="InvokePaymentTask" name="Invoke payment" camunda:delegateExpression="${paymentRequest}">
-      <bpmn:incoming>Flow_08huam4</bpmn:incoming>
+      <bpmn:incoming>Flow_0wymlz3</bpmn:incoming>
       <bpmn:outgoing>Flow_05ylx1l</bpmn:outgoing>
     </bpmn:sendTask>
+    <bpmn:sequenceFlow id="Flow_0wymlz3" sourceRef="Activity_1s0jxjb" targetRef="InvokePaymentTask" />
+    <bpmn:businessRuleTask id="Activity_1s0jxjb" name="Get discount">
+      <bpmn:incoming>Flow_08huam4</bpmn:incoming>
+      <bpmn:outgoing>Flow_0wymlz3</bpmn:outgoing>
+    </bpmn:businessRuleTask>
   </bpmn:process>
   <bpmn:message id="Message_21j7h5o" name="paymentCompletedMessage" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -30,31 +35,38 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_13wyf35_di" bpmnElement="PaymentCompletedEvent">
-        <dc:Bounds x="432" y="99" width="36" height="36" />
+        <dc:Bounds x="562" y="99" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="425" y="142" width="51" height="27" />
+          <dc:Bounds x="555" y="142" width="51" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0n1m25l_di" bpmnElement="OrderCompletedEndEvent">
-        <dc:Bounds x="532" y="99" width="36" height="36" />
+        <dc:Bounds x="662" y="99" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="509" y="142" width="82" height="14" />
+          <dc:Bounds x="639" y="142" width="82" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1av92f5_di" bpmnElement="InvokePaymentTask">
-        <dc:Bounds x="270" y="77" width="100" height="80" />
+        <dc:Bounds x="400" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1focgfx_di" bpmnElement="Activity_1s0jxjb">
+        <dc:Bounds x="250" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_08huam4_di" bpmnElement="Flow_08huam4">
         <di:waypoint x="215" y="117" />
-        <di:waypoint x="270" y="117" />
+        <di:waypoint x="250" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_05ylx1l_di" bpmnElement="Flow_05ylx1l">
-        <di:waypoint x="370" y="117" />
-        <di:waypoint x="432" y="117" />
+        <di:waypoint x="500" y="117" />
+        <di:waypoint x="562" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0rq6vhf_di" bpmnElement="Flow_0rq6vhf">
-        <di:waypoint x="468" y="117" />
-        <di:waypoint x="532" y="117" />
+        <di:waypoint x="598" y="117" />
+        <di:waypoint x="662" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0wymlz3_di" bpmnElement="Flow_0wymlz3">
+        <di:waypoint x="350" y="117" />
+        <di:waypoint x="400" y="117" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
