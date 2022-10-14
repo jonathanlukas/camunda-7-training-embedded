@@ -50,8 +50,10 @@ ProcessInstance processInstance = runtimeService().startProcessInstanceByKey("Pa
 ```java
 assertThat(processInstance).isWaitingAt("StartEvent_Payment_Required");
 execute(job());
+assertThat(processInstance).isWaitingAt("Activity_Charge_Credit_Card");
+execute(job());
 // Make assertions on the process instance
 assertThat(processInstance).isEnded().hasPassed("Activity_Charge_Credit_Card")
     .hasNotPassed("Event_Payment_Complete")
-    .hasPassed("Event_0b0thna");
+    .hasPassed(<payment failed end event id>);
 ```
