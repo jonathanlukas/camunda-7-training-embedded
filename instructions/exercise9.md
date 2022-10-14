@@ -12,8 +12,8 @@ In this exercise you will handle an error that happened in the credit card servi
 3. For simplicity, add a Message End Event to the error event. Name the message end event Payment failed. For the implementation, select delegate expression and use the same delegate as in the other message end event: **${paymentCompletion}**.
 
 ### Updating the Charge Credit Card Delegate
-1. Open the **ChargeCreditCardDelegate**.
-2. Within the execute function, wrap the call to the credit card service in a try-catch-block. When you catch an exception, throw the BPMN Error:
+4. Open the **ChargeCreditCardDelegate**.
+5. Within the execute function, wrap the call to the credit card service in a try-catch-block. When you catch an exception, throw the BPMN Error:
 ```java
 try {
   creditCardService.chargeAmount(cardNumber, cvc, expiryData, amount);
@@ -24,17 +24,17 @@ try {
 
 ### JUnit Testing
 
-1. Add a new test method with the name testInvalidExpiryDate(). Add the @Test annotation.
+6. Add a new test method with the name testInvalidExpiryDate(). Add the @Test annotation.
 ```java
 @Test
 public void testInvalidExpiryDate() {
 }
 ```
-2. Mock the **paymentCompletion** delegate, so that no message is sent:
+7. Mock the **paymentCompletion** delegate, so that no message is sent:
 ```java
 Mocks.register("paymentCompletion", (JavaDelegate)execution -> {});
 ```
-3. Start the payment process. Make sure to use an invalid expiry date:
+8. Start the payment process. Make sure to use an invalid expiry date:
 ```java
 Map<String, Object> variables = new HashMap<String, Object>();
 variables.put("orderTotal", 30.00);
@@ -45,7 +45,7 @@ variables.put("expiryDate","09/241");
 // Start process with Java API and variables
 ProcessInstance processInstance = runtimeService().startProcessInstanceByKey("PaymentProcess", variables);
 ```
-4. In your test, start the job of the process and add assertions to verify that the error got caught:
+9. In your test, start the job of the process and add assertions to verify that the error got caught:
 ```java
 assertThat(processInstance).isWaitingAt("StartEvent_Payment_Required");
 execute(job());

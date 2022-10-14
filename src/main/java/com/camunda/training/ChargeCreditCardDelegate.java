@@ -1,6 +1,7 @@
 package com.camunda.training;
 
 import com.camunda.training.services.CreditCardService;
+import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,10 @@ public class ChargeCreditCardDelegate implements JavaDelegate {
     if (cvc.equals("789")) {
       throw new RuntimeException("CVC invalid!");
     }
-    creditCardService.chargeAmount(cardNumber, cvc, expiryData, amount);
+    try {
+      creditCardService.chargeAmount(cardNumber, cvc, expiryData, amount);
+    } catch (Exception exc) {
+      throw new BpmnError("chargingError", "We failed to charge credit card with card number " + cardNumber, exc);
+    }
   }
 }
