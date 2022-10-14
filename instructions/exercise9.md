@@ -27,6 +27,7 @@ try {
 6. Add a new test method with the name testInvalidExpiryDate(). Add the @Test annotation.
 ```java
 @Test
+@Deployment(resources = "payment_process.bpmn")
 public void testInvalidExpiryDate() {
 }
 ```
