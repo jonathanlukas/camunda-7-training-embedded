@@ -24,11 +24,10 @@ The goal of this lab is to build your first JUnit test case for a BPMN 2.0 proce
       <scope>test</scope>
    </dependency>
    <dependency>
-      <groupId>org.camunda.bpm.extension</groupId>
+      <groupId>org.camunda.bpm</groupId>
       <artifactId>camunda-bpm-junit5</artifactId>
-      <version>1.0.2</version>
       <scope>test</scope>
-   </dependency>
+    </dependency>
    <dependency>
       <groupId>org.camunda.bpm.assert</groupId>
       <artifactId>camunda-bpm-assert</artifactId>
