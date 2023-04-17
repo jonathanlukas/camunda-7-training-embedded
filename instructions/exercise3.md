@@ -35,11 +35,11 @@ The goal of this lab is to build your first JUnit test case for a BPMN 2.0 proce
       <scope>test</scope>
    </dependency>
    <dependency>
-  <groupId>org.camunda.community.process_test_coverage</groupId>
-  <artifactId>camunda-process-test-coverage-junit5-platform-7</artifactId>
-  <version>2.0.0</version>
-  <scope>test</scope>
-</dependency>
+     <groupId>org.camunda.community.process_test_coverage</groupId>
+     <artifactId>camunda-process-test-coverage-junit5-platform-7</artifactId>
+     <version>2.0.0</version>
+     <scope>test</scope>
+   </dependency>
    ```
 3. Open the JUnit test class from the folder `src/test/java` and inspect the content.
 4. Prepare your IDE to handle the static imports of camunda-bpm-assert and assertJ. In Eclipse go to **Window > Preferences > Java > Editor > Content Assist > Favorites > New Type...** and add the following types: `org.camunda.bpm.engine.test.assertions.ProcessEngineTests` and `org.assertj.core.api.Assertions`. Also, go to **Window > Preferences > Java > Code Style > Organize Imports** and set "Number of static imports needed for .\*" to "0". IntelliJ should pick up the **pom.xml** updates and prompt you to import the changes.
