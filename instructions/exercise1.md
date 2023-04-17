@@ -21,3 +21,19 @@ To achieve this, we will put these expressions on the outgoing sequence flows:
 `${not creditSufficient}` on the sequence flow with _no_.
 
 Save the progress and deploy the process model with the rocket ship button.
+
+## Run a process instance
+
+Go to `localhost:8080` and login using demo/demo.
+
+Then, go to Tasklist and click on **Start Process Instance** in the top right corner.
+
+Select the _Pay Process_ and add a process variable in the next dialog:
+
+Name: `creditSufficient`, type **Boolean**, choose the value you prefer.
+
+After this is done, go to the Cockpit using the App Switcher in the top right corner.
+
+Click on **Processes** in the top bar and select _History View_ of the _Pay Process_ in the list.
+
+There should be one process instance in the list on the bottom right. Inspect its activity history and variables. Is the result expected?
