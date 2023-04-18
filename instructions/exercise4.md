@@ -90,12 +90,13 @@ In this lab, we will improve the variable handling by adding service tasks and t
      Mocks.register("chargeCreditCard", new ChargeCreditCardDelegate(new CreditCardService()));
    }
    ```
-   Then, add more variables to the map before starting the process and remove the line containing the `customerCredit` and `creditSufficient`:
+   Then, replace the variables contained in the input with:
    ```java
    variables.put("customerId", "cust20");
    variables.put("cardNumber", "1234 5678");
    variables.put("CVC","123");
-   variables.put("expiryDate","09/24");
+   variables.put("expiryDate", "09/24");
+   variables.put("orderTotal", 30.00);
    ```
 8. Run your unit test and inspect the log output.
 9. Optional: Restart your application and run the process by starting a process from tasklist. Then, inspect the history of the process instance.
