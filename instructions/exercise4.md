@@ -15,8 +15,9 @@ In this lab, we will improve the variable handling by adding service tasks and t
 ## Detailed steps
 
 1. In the process model, choose the 2 tasks and morph them to be service tasks. You can achieve this by clicking on each task, selecting the wrench icon in the context and then select `Service Task`.
-2. After the tasks are morphed, select each task again and define an implementation of type `Delegate expression`. Name one `${deductCredit}` and the other one `${chargeCreditCard}`. Download and insert the [services](https://github.com/jonathanlukas/camunda-7-training-embedded/tree/ex4/src/main/java/com/camunda/training/services) to your project.
-3. In your Java project, create a new Java class next to `CamundaApplication`. Name it `DeductCreditDelegate`:
+2. After the tasks are morphed, select each task again and define an implementation of type `Delegate expression`. Name one `${deductCredit}` and the other one `${chargeCreditCard}`.
+3. Download and insert the [services](https://github.com/jonathanlukas/camunda-7-training-embedded/tree/ex4/src/main/java/com/camunda/training/services) to your project in case they are missing.
+4. In your Java project, create a new Java class next to `CamundaApplication`. Name it `DeductCreditDelegate`:
    ```java
    package com.camunda.training;
 
@@ -49,7 +50,7 @@ In this lab, we will improve the variable handling by adding service tasks and t
      }
    }
    ```
-4. Create another Java class right next to it called `ChargeCreditCardDelegate`:
+5. Create another Java class right next to it called `ChargeCreditCardDelegate`:
    ```java
    package com.camunda.training;
 
@@ -80,8 +81,8 @@ In this lab, we will improve the variable handling by adding service tasks and t
      }
    }
    ```
-5. Now, we can adjust the expressions on the sequence flows to use the data provided by the services. For the `yes`-Path, enter `${openAmount == 0}`. For the `no`-Path, enter `${openAmount > 0}`.
-6. Finally, we will have to adjust the Junit test. There, we need to register our delegate implementations as mocks (there is no spring context in a junit test by default). Add this method above your first test method:
+6. Now, we can adjust the expressions on the sequence flows to use the data provided by the services. For the `yes`-Path, enter `${openAmount == 0}`. For the `no`-Path, enter `${openAmount > 0}`.
+7. Finally, we will have to adjust the Junit test. There, we need to register our delegate implementations as mocks (there is no spring context in a junit test by default). Add this method above your first test method:
    ```java
    @BeforeEach
    public void setup() {
@@ -96,5 +97,5 @@ In this lab, we will improve the variable handling by adding service tasks and t
    variables.put("CVC","123");
    variables.put("expiryDate","09/24");
    ```
-7. Run your unit test and inspect the log output.
-8. Optional: Restart your application and run the process by starting a process from tasklist. Then, inspect the history of the process instance.
+8. Run your unit test and inspect the log output.
+9. Optional: Restart your application and run the process by starting a process from tasklist. Then, inspect the history of the process instance.
