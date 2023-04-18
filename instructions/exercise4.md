@@ -89,7 +89,7 @@ In this lab, we will improve the variable handling by adding service tasks and t
      Mocks.register("chargeCreditCard", new ChargeCreditCardDelegate(new CreditCardService()));
    }
    ```
-   Then, add more variables to the map before starting the process and remove the line containing the `customerCredit`:
+   Then, add more variables to the map before starting the process and remove the line containing the `customerCredit` and `creditSufficient`:
    ```java
    variables.put("customerId", "cust20");
    variables.put("cardNumber", "1234 5678");
