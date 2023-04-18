@@ -61,8 +61,7 @@ The goal of this lab is to build your first JUnit test case for a BPMN 2.0 proce
    ```java
    // Create a HashMap to put in variables for the process instance
    Map<String, Object> variables = new HashMap<String, Object>();
-   variables.put("orderTotal", 30.00);
-   variables.put("customerCredit", 20.00);
+   variables.put("creditSufficient", false);
    // Start process with Java API and variables
    ProcessInstance processInstance = runtimeService().startProcessInstanceByKey("PaymentProcess", variables);
    // Make assertions on the process instance
