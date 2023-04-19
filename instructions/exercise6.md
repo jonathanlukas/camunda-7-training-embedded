@@ -117,7 +117,8 @@ You create a new process model to handle orders. The payment gets started by rec
 
 ### Acceptance testing
 
-11. Start a process instance from the modeler using this payload:
+11. Restart the Application.
+12. Start a process instance from the modeler using this payload:
     ```json
      {
         "orderTotal": {
@@ -142,7 +143,7 @@ You create a new process model to handle orders. The payment gets started by rec
     and this business key: `Test process 1`
     
     What happens?
-12. We will deal with the problem in the next exercise.
+13. We will deal with the problem in the next exercise.
 
 ### Summary
 
