@@ -110,7 +110,7 @@ You create a new process model to handle orders. The payment gets started by rec
     Mocks.register("paymentRequest", new SendPaymentRequestDelegate());
     Mocks.register("paymentCompletion", new SendPaymentCompletionDelegate());
    ```
-   At the same time, add a snippet above `testHappyPath` and `testCreditSufficient`:
+   At the same time, add a snippet at start of `testHappyPath` and `testCreditSufficient`:
    ```java
    Mocks.register("paymentCompletion", (JavaDelegate) ex -> {});
    ```
