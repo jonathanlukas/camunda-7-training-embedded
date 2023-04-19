@@ -40,7 +40,7 @@ In this lab, we will write an end-to-end test for the order process and the paym
 3. Run all tests again. Some are failing. Why?
 4. For the failing tests, you will need to execute the job from the start event of the payment process. To do this, insert this at the right point:
    ```java
-   assertThat(paymentProcess).isWaitingAt("StartEvent_Payment_Required");
+   assertThat(processInstance).isWaitingAt("StartEvent_Payment_Required");
    execute(job());
    ```
 5. For the end-to-end test, this will not work as we only have the process instance of the order process available. We need to query the process instance of the payment process before to do the assertion and execute the job:
