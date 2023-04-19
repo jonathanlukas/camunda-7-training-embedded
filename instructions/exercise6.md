@@ -11,7 +11,7 @@ You create a new process model to handle orders. The payment gets started by rec
 1. Enter the Modeler and create a new BPMN diagram. Model an order process with the following elements:
     * Start event **Order received**
     * Send task **Invoke payment**
-    * Receive event **Payment completed**
+    * Message Intermediate Catch event **Payment completed**
     * End event **Order completed**
 
 2. Fill in the technical attributes:
