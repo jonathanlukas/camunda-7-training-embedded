@@ -145,7 +145,9 @@ You create a new process model to handle orders. The payment gets started by rec
     
     <details>
     <summary>What happens?</summary>
+   
     `Cannot correlate message 'paymentCompletedMessage': No process definition or execution matches the parameters`
+    
     </details>
 
 </details>
