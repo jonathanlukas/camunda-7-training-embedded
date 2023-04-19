@@ -119,8 +119,7 @@ You create a new process model to handle orders. The payment gets started by rec
 
 11. Start a process instance from the modeler using this payload:
     ```json
-    {
-      "variables": {
+     {
         "orderTotal": {
           "value": 49.99,
           "type": "Double"
@@ -138,10 +137,10 @@ You create a new process model to handle orders. The payment gets started by rec
         "expiryDate": {
           "value": "09/24"
         }
-      },
-      "businessKey": "Order test 1"
-    }    
+      }  
     ```
+    and this business key: `Test process 1`
+    
     What happens?
 12. We will deal with the problem in the next exercise.
 
