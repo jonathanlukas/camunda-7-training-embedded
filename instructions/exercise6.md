@@ -8,7 +8,7 @@ You create a new process model to handle orders. The payment gets started by rec
 
 ### Process modeling
 
-1. Enter the Modeler and create a new BPMN diagram. Model an order process with the following elements:
+1. Enter the Modeler and create a new BPMN diagram **for Camunda 7**. Model an order process with the following elements:
     * Start event **Order received**
     * Send task **Invoke payment**
     * Message Intermediate Catch event **Payment completed**
