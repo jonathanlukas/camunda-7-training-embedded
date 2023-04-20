@@ -20,11 +20,11 @@ You have to define what dat should be displayed on that forms.
 9. In the Modeler, create a new Form for the Camunda Platform.
 10. In the property panel of the form, change the Id from the generated value to the value you have set in the user task: **checkPaymentDataForm**.
 11. Enter Cockpit and select the last completed process instance of the payment process from the history. Open the Variable tab. All (important) variables should be shown on the form. Additionally, a form field for the decision is required.
-12. Drag a Text from the palette onto the canvas to provide a headline. The Text could be like
+12. Drag a Text view from the palette onto the canvas to provide a headline. The Text could be like
 ```
 ### Check the failed payment
 ```
-13. Drag a Text Field for each String type variable. Enter Field labels for the user. Enter Keys matching the process variable names.
+13. Drag a Text field for each String type variable. Enter Field labels for the user. Enter Keys matching the process variable names.
 14. Add a Number field for each Double type variable (`orderTotal` and `openAmount`).
 15. Add a Checkbox field for the decision of the user. It should get a Key of **errorResolved** to match the condition of the XOR gateway.
 
